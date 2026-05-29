@@ -5,10 +5,12 @@
     "description": "Configuration for all bot commands. Anything with `basic.X` in its description will be replaced with the content of X within basic.json.",
     "type": "object",
     "properties": {
-        "accept": {
-            "title": "Accept",
-            "description": "Accepts trades initiated by the trade command.",
-            "examples": ["$$accept [trade identifier]"],
+        "roll": {
+            "title": "Roll",
+            "description": "Roll one die or many dice.",
+            "examples": [
+                "$roll [count] [type of die]"
+            ],
             "type": "object",
             "properties": {
                 "enabled": {
@@ -41,164 +43,36 @@
                     "description": "How long (in seconds) a user should wait between uses of this command.",
                     "type": "integer",
                     "default": 0
+                },
+                "wait": {
+                    "title": "Wait times",
+                    "description": "Configurable wait times for setTimeouts used in command.",
+                    "type": "object",
+                    "properties": {
+                        "initial": {
+                            "title": "Initial",
+                            "description": "First wait for when the die is rolled.",
+                            "type": "integer",
+                            "default": 500
+                        },
+                        "between": {
+                            "title": "Between",
+                            "description": "Wait between rolls.",
+                            "type": "integer",
+                            "default": 100
+                        }
+                    },
+                    "required": ["initial", "between"]
                 }
             },
-            "required": ["enabled", "aliases", "description", "commandType", "cooldown"]
-        },
-        "balance": {
-            "title": "Balance",
-            "description": "Checks the amount of currency in a user's account.",
-            "examples": ["$$balance"],
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "title": "Enabled",
-                    "description": "Whether or not the command should be able to be used.",
-                    "type": "boolean",
-                    "default": true
-                },
-                "aliases": {
-                    "title": "Aliases",
-                    "description": "A list of all other names this command can go by.",
-                    "type": "array",
-                    "default": []
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "A description of the command, used in the $$help command.",
-                    "type": "string",
-                    "default": "Check the basic.currency in your account."
-                },
-                "commandType": {
-                    "title": "Command Type",
-                    "description": "A definition of what type of command this is. Currently unused.",
-                    "type": "string",
-                    "enum": ["util", "game"],
-                    "default": "util"
-                },
-                "cooldown": {
-                    "title": "Cooldown",
-                    "description": "How long (in seconds) a user should wait between uses of this command.",
-                    "type": "integer",
-                    "default": 0
-                }
-            },
-            "required": ["enabled", "aliases", "description", "commandType", "cooldown"]
-        },
-        "blackjack": {
-            "title": "Blackjack",
-            "description": "Initiates a game of Blackjack.",
-            "examples": ["$$blackjack"],
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "title": "Enabled",
-                    "description": "Whether or not the command should be able to be used.",
-                    "type": "boolean",
-                    "default": true
-                },
-                "aliases": {
-                    "title": "Aliases",
-                    "description": "A list of all other names this command can go by.",
-                    "type": "array",
-                    "default": []
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "A description of the command, used in the $$help command.",
-                    "type": "string",
-                    "default": "Play a game of blackjack."
-                },
-                "commandType": {
-                    "title": "Command Type",
-                    "description": "A definition of what type of command this is. Currently unused.",
-                    "type": "string",
-                    "enum": ["util", "game"],
-                    "default": "game"
-                },
-                "cooldown": {
-                    "title": "Cooldown",
-                    "description": "How long (in seconds) a user should wait between uses of this command.",
-                    "type": "integer",
-                    "default": 0
-                },
-                "winMult": {
-                    "title": "Base Win Multiplier",
-                    "description": "What to multiply the bet by if user wins.",
-                    "type": "number",
-                    "default": 2
-                },
-                "maxWinMult": {
-                    "title": "Maximum Win Multiplier",
-                    "description": "Maximum amount to multiply the bet by if user wins.",
-                    "type": "number",
-                    "default": 3
-                },
-                "instaWinMult": {
-                    "title": "Instant Win Multiplier",
-                    "description": "Amount to multiply the bet by if user wins immediately/on first dealt hand.",
-                    "type": "number",
-                    "default": 5
-                },
-                "minimumBet": {
-                    "title": "Minimum Bet",
-                    "description": "The minimum amount of currency to bet on a game of Blackjack.",
-                    "type": "integer",
-                    "default": 25
-                }
-            },
-            "required": ["enabled", "aliases", "description", "commandType", "cooldown", "winMult", "maxWinMult", "instaWinMult", "minimumBet"]
-        },
-        "circulation": {
-            "title": "Circulation",
-            "description": "Allows users to see the amount of currency in circulation. Can also be called as `$$circulation avg` to get the average amount of currency among all users.",
-            "examples": [
-                "$$circulation",
-                "$$circulation avg"
-            ],
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "title": "Enabled",
-                    "description": "Whether or not the command should be able to be used.",
-                    "type": "boolean",
-                    "default": true
-                },
-                "aliases": {
-                    "title": "Aliases",
-                    "description": "A list of all other names this command can go by.",
-                    "type": "array",
-                    "default": []
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "A description of the command, used in the $$help command.",
-                    "type": "string",
-                    "default": "Check the amount of basic.currency in circulation."
-                },
-                "commandType": {
-                    "title": "Command Type",
-                    "description": "A definition of what type of command this is. Currently unused.",
-                    "type": "string",
-                    "enum": ["util", "game"],
-                    "default": "util"
-                },
-                "cooldown": {
-                    "title": "Cooldown",
-                    "description": "How long (in seconds) a user should wait between uses of this command.",
-                    "type": "integer",
-                    "default": 10
-                }
-            },
-            "required": ["enabled", "aliases", "description", "commandType", "cooldown"]
+            "required": ["enabled", "aliases", "description", "commandType", "cooldown", "wait"]
         },
         "flip": {
             "title": "Flip",
-            "description": "Allows users to bet currency on the outcome of a coin flip.",
+            "description": "Allows users to flip a coin.",
             "examples": [
-                "$$flip 50 heads",
-                "$$flip 50",
-                "$$flip all tails"
+                "$flip heads",
+                "$flip tails"
             ],
             "type": "object",
             "properties": {
@@ -232,14 +106,34 @@
                     "description": "How long (in seconds) a user should wait between uses of this command.",
                     "type": "integer",
                     "default": 4
+                },
+                "wait": {
+                    "title": "Wait times",
+                    "description": "Configurable wait times for setTimeouts used in command.",
+                    "type": "object",
+                    "properties": {
+                        "initial": {
+                            "title": "Initial",
+                            "description": "First wait for when the coin is flipped.",
+                            "type": "integer",
+                            "default": 500
+                        },
+                        "result": {
+                            "title": "Result",
+                            "description": "Last wait before result is displayed.",
+                            "type": "integer",
+                            "default": 1000
+                        }
+                    },
+                    "required": ["initial", "result"]
                 }
             },
-            "required": ["enabled", "aliases", "description", "commandType", "cooldown"]
+            "required": ["enabled", "aliases", "description", "commandType", "cooldown", "wait"]
         },
         "help": {
             "title": "Help",
             "description": "Shows a list of all available commands.",
-            "examples": ["$$help", "$$?"],
+            "examples": ["$help", "$?"],
             "type": "object",
             "properties": {
                 "enabled": {
@@ -275,674 +169,7 @@
                 }
             },
             "required": ["enabled", "aliases", "description", "commandType", "cooldown"]
-        },
-        "leaderboard": {
-            "title": "Leaderboard",
-            "description": "Displays a list of the users with the most amount of currency.",
-            "examples": ["$$leaderboard", "$$leader"],
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "title": "Enabled",
-                    "description": "Whether or not the command should be able to be used.",
-                    "type": "boolean",
-                    "default": true
-                },
-                "aliases": {
-                    "title": "Aliases",
-                    "description": "A list of all other names this command can go by.",
-                    "type": "array",
-                    "default": ["scoreboard", "leader", "scores", "lboard", "sboard"]
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "A description of the command, used in the $$help command.",
-                    "type": "string",
-                    "default": "Shows the top basic.currency basic.hodlers."
-                },
-                "commandType": {
-                    "title": "Command Type",
-                    "description": "A definition of what type of command this is. Currently unused.",
-                    "type": "string",
-                    "enum": ["util", "game"],
-                    "default": "util"
-                },
-                "cooldown": {
-                    "title": "Cooldown",
-                    "description": "How long (in seconds) a user should wait between uses of this command.",
-                    "type": "integer",
-                    "default": 30
-                },
-                "numberToShow": {
-                    "title": "Number to Show",
-                    "description": "How many top users should be shown.",
-                    "type": "integer",
-                    "default": 5
-                }
-            },
-            "required": ["enabled", "aliases", "description", "commandType", "cooldown", "numberToShow"]
-        },
-        "loserboard": {
-            "title": "Loserboard",
-            "description": "Displays a list of the users with the least amount of currency.",
-            "examples": ["$$loserboard"],
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "title": "Enabled",
-                    "description": "Whether or not the command should be able to be used.",
-                    "type": "boolean",
-                    "default": true
-                },
-                "aliases": {
-                    "title": "Aliases",
-                    "description": "A list of all other names this command can go by.",
-                    "type": "array",
-                    "default": []
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "A description of the command, used in the $$help command.",
-                    "type": "string",
-                    "default": "Shows the top basic.currency basic.hodlers."
-                },
-                "commandType": {
-                    "title": "Command Type",
-                    "description": "A definition of what type of command this is. Currently unused.",
-                    "type": "string",
-                    "enum": ["util", "game"],
-                    "default": "util"
-                },
-                "cooldown": {
-                    "title": "Cooldown",
-                    "description": "How long (in seconds) a user should wait between uses of this command.",
-                    "type": "integer",
-                    "default": 30
-                },
-                "numberToShow": {
-                    "title": "Number to Show",
-                    "description": "How many top users should be shown.",
-                    "type": "integer",
-                    "default": 5
-                }
-            },
-            "required": ["enabled", "aliases", "description", "commandType", "cooldown", "numberToShow"]
-        },
-        "reset": {
-            "title": "Reset",
-            "description": "Shows information about the reset feature. Must be configured within extras.json before enabling.",
-            "examples": ["$$reset"],
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "title": "Enabled",
-                    "description": "Whether or not the command should be able to be used.",
-                    "type": "boolean",
-                    "default": false
-                },
-                "aliases": {
-                    "title": "Aliases",
-                    "description": "A list of all other names this command can go by.",
-                    "type": "array",
-                    "default": []
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "A description of the command, used in the $$help command.",
-                    "type": "string",
-                    "default": "Shows information about the reset feature."
-                },
-                "commandType": {
-                    "title": "Command Type",
-                    "description": "A definition of what type of command this is. Currently unused.",
-                    "type": "string",
-                    "enum": ["util", "game"],
-                    "default": "util"
-                },
-                "cooldown": {
-                    "title": "Cooldown",
-                    "description": "How long (in seconds) a user should wait between uses of this command.",
-                    "type": "integer",
-                    "default": 0
-                },
-                "daysLeftToShowHMS": {
-                    "title": "Days Left to Show HH:MM:SS",
-                    "description": "Using the reset command will show how many days are left until the next reset. Once entered day left has been reached, it will also show hours/minutes/seconds until the next reset as well.",
-                    "type": "integer",
-                    "default": 5
-                }
-            },
-            "required": ["enabled", "aliases", "description", "commandType", "cooldown", "daysLeftToShowHMS"]
-        },
-        "slots": {
-            "title": "Slots",
-            "description": "Bet currency on the outcome of a slot machine created with emojis.",
-            "examples": ["$$slots 50"],
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "title": "Enabled",
-                    "description": "Whether or not the command should be able to be used.",
-                    "type": "boolean",
-                    "default": true
-                },
-                "aliases": {
-                    "title": "Aliases",
-                    "description": "A list of all other names this command can go by.",
-                    "type": "array",
-                    "default": []
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "A description of the command, used in the $$help command.",
-                    "type": "string",
-                    "default": "Bet basic.currency on the outcome of a slot machine."
-                },
-                "commandType": {
-                    "title": "Command Type",
-                    "description": "A definition of what type of command this is. Currently unused.",
-                    "type": "string",
-                    "enum": ["util", "game"],
-                    "default": "game"
-                },
-                "cooldown": {
-                    "title": "Cooldown",
-                    "description": "How long (in seconds) a user should wait between uses of this command.",
-                    "type": "integer",
-                    "default": 10
-                },
-                "minimumBet": {
-                    "title": "Minimum Bet",
-                    "description": "The minimum amount of currency to bet on a game of Blackjack.",
-                    "type": "integer",
-                    "default": 25
-                }
-            },
-            "required": ["enabled", "aliases", "description", "commandType", "cooldown", "minimumBet"]
-        },
-        "start": {
-            "title": "Start",
-            "description": "Creates an account/wallet to hold currency. Gives a random amount at start.",
-            "examples": ["$$start"],
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "title": "Enabled",
-                    "description": "Whether or not the command should be able to be used.",
-                    "type": "boolean",
-                    "default": true
-                },
-                "aliases": {
-                    "title": "Aliases",
-                    "description": "A list of all other names this command can go by.",
-                    "type": "array",
-                    "default": []
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "A description of the command, used in the $$help command.",
-                    "type": "string",
-                    "default": "Start your basic.botName account with a random number of basic.currency."
-                },
-                "commandType": {
-                    "title": "Command Type",
-                    "description": "A definition of what type of command this is. Currently unused.",
-                    "type": "string",
-                    "enum": ["util", "game"],
-                    "default": "util"
-                },
-                "cooldown": {
-                    "title": "Cooldown",
-                    "description": "How long (in seconds) a user should wait between uses of this command.",
-                    "type": "integer",
-                    "default": 500
-                },
-                "baseLowerBound": {
-                    "title": "Base Lower Bound",
-                    "description": "The minimum amount of currency to start an account with.",
-                    "type": "integer",
-                    "default": 10
-                },
-                "baseUpperBound": {
-                    "title": "Base Upper Bound",
-                    "description": "The maximum amount of currency to start an account with.",
-                    "type": "integer",
-                    "default": 1000
-                }
-            },
-            "required": ["enabled", "aliases", "description", "commandType", "cooldown", "baseLowerBound", "baseUpperBound"]
-        },
-        "stocks": {
-            "title": "Stocks",
-            "description": "Stocks can be created, bought, sold, deleted, and have its history viewed using a graph. Enabling this command will create timed events, meaning the bot will be running code on intervals.",
-            "examples": ["$$stocks"],
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "title": "Enabled",
-                    "description": "Whether or not the command should be able to be used.",
-                    "type": "boolean",
-                    "default": false
-                },
-                "aliases": {
-                    "title": "Aliases",
-                    "description": "A list of all other names this command can go by.",
-                    "type": "array",
-                    "default": []
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "A description of the command, used in the $$help command.",
-                    "type": "string",
-                    "default": "Handle purchasing/selling fake stocks using basic.currency."
-                },
-                "commandType": {
-                    "title": "Command Type",
-                    "description": "A definition of what type of command this is. Currently unused.",
-                    "type": "string",
-                    "enum": ["util", "game"],
-                    "default": "game"
-                },
-                "cooldown": {
-                    "title": "Cooldown",
-                    "description": "How long (in seconds) a user should wait between uses of this command.",
-                    "type": "integer",
-                    "default": 10
-                },
-                "types": {
-                    "title": "Stock Types",
-                    "description": "Allowed stock types. Currently 3 are available. Steady: Cost will rise/lower every tick based on a trend with little variance. Volatile: Still follows trends, but has a higher variance. Sporadic: Completely random, with a 50/50 chance to either increase or decrease each tick.",
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "enum": ["steady", "volatile", "sporadic"]
-                    },
-                    "default": ["steady", "volatile", "sporadic"]
-                },
-                "trends": {
-                    "title": "Stock Trends",
-                    "description": "Allowed trend types. Currently 3 are available. Up: Variance will favor positive increments. Down: Variance will favor negative increments. Stagnant: Variance will not be affected much by trend.",
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "enum": ["up", "down", "stagnant"]
-                    },
-                    "default": ["up", "down", "stagnant"]
-                },
-                "allowCreate": {
-                    "title": "Allow New Stock Creation",
-                    "description": "Allow creation of new stocks.",
-                    "type": "boolean",
-                    "default": true
-                },
-                "maxCreates": {
-                    "title": "Max Stock Creation Per User",
-                    "description": "Maximum number of stocks to be created by a single user.",
-                    "type": "integer",
-                    "default": 1
-                },
-                "maxHistory": {
-                    "title": "Max Stock History to Store",
-                    "description": "Amount of ticks to keep historical data for.",
-                    "type": "integer",
-                    "default": 10
-                },
-                "showHistory": {
-                    "title": "Stock History to Show",
-                    "description": "Amount of ticks to show historical data for when using `$$stocks view`.",
-                    "type": "integer",
-                    "default": 5
-                },
-                "updateFrequency": {
-                    "title": "Stock Update Frequency",
-                    "description": "Amount of time (in MS) between ticks.",
-                    "type": "integer",
-                    "default": 600000
-                },
-                "dividendFrequency": {
-                    "title": "Stock Dividend Payout Frequency",
-                    "description": "Amount of time (in MS) between dividend payouts. Currently unused.",
-                    "type": "integer",
-                    "default": 0
-                },
-                "createBounds": {
-                    "title": "Stock Creation Value Bounds",
-                    "description": "Value of a stock when initially created using `$$stocks create`.",
-                    "type": "object",
-                    "properties": {
-                        "min": {
-                            "title": "Minimum",
-                            "description": "Minimum amount of created stocks.",
-                            "type": "integer",
-                            "default": 10
-                        },
-                        "max": {
-                            "title": "Maximum",
-                            "description": "Maximum amount of created stocks.",
-                            "type": "integer",
-                            "default": 1000
-                        }
-                    },
-                    "required": ["min", "max"]
-                },
-                "shareBounds": {
-                    "title": "Stock Creation Share Bounds",
-                    "description": "Amount of shares created for a stock when initially created using `$$stocks create`.",
-                    "type": "object",
-                    "properties": {
-                        "min": {
-                            "title": "Minimum",
-                            "description": "Minimum amount of shares.",
-                            "type": "integer",
-                            "default": 10
-                        },
-                        "max": {
-                            "title": "Maximum",
-                            "description": "Maximum amount of shares.",
-                            "type": "integer",
-                            "default": 1000
-                        }
-                    },
-                    "required": ["min", "max"]
-                },
-                "creatorSharesUpperPercent": {
-                    "title": "Creator Shares Upper Percent",
-                    "description": "Maximum percentage of available shares to give to the stock's creator.",
-                    "type": "number",
-                    "default": 0.05
-                },
-                "typeActivatePercent": {
-                    "title": "Type Activation Percent",
-                    "description": "Percentage for a specific stock type to activate its unique variance effect.",
-                    "type": "object",
-                    "properties": {
-                        "volatile": {
-                            "title": "Volatile",
-                            "description": "Percentage chance for a volatile stock to have a spike in variance.",
-                            "type": "number",
-                            "default": 0.6
-                        }
-                    },
-                    "required": ["volatile"]
-                },
-                "trendPercent": {
-                    "title": "Trend Percentages",
-                    "description": "Controls changes to variance based on trend.",
-                    "type": "object",
-                    "properties": {
-                        "up": {
-                            "title": "Upward Trending Stocks",
-                            "description": "Controls change to variance for upward trending stocks.",
-                            "type": "object",
-                            "properties": {
-                                "chanceToChange": {
-                                    "title": "Percent change to change trend",
-                                    "description": "Percent chance to change to another trend.",
-                                    "type": "number",
-                                    "default": 0.25
-                                },
-                                "changeToVariance": {
-                                    "title": "Percent change to stock value variance",
-                                    "description": "Percent change to stock variance, which directly affects value.",
-                                    "type": "number",
-                                    "default": 0.25
-                                }
-                            },
-                            "required": ["chanceToChange", "changeToVariance"]
-                        },
-                        "down": {
-                            "title": "Downward Trending Stocks",
-                            "description": "Controls change to variance for downward trending stocks.",
-                            "type": "object",
-                            "properties": {
-                                "chanceToChange": {
-                                    "title": "Percent change to change trend",
-                                    "description": "Percent chance to change to another trend.",
-                                    "type": "number",
-                                    "default": 0.25
-                                },
-                                "changeToVariance": {
-                                    "title": "Percent change to stock value variance",
-                                    "description": "Percent change to stock variance, which directly affects value.",
-                                    "type": "number",
-                                    "default": 0.25
-                                }
-                            },
-                            "required": ["chanceToChange", "changeToVariance"]
-                        },
-                        "stagnant": {
-                            "title": "Stangnant Stocks",
-                            "description": "Controls change to variance for stagnant stocks.",
-                            "type": "object",
-                            "properties": {
-                                "chanceToChange": {
-                                    "title": "Percent change to change trend",
-                                    "description": "Percent chance to change to another trend.",
-                                    "type": "number",
-                                    "default": 0.10
-                                },
-                                "changeToVariance": {
-                                    "title": "Percent change to stock value variance",
-                                    "description": "Percent change to stock variance, which directly affects value.",
-                                    "type": "number",
-                                    "default": 0.05
-                                }
-                            },
-                            "required": ["chanceToChange", "changeToVariance"]
-                        }
-                    }
-                },
-                "volatilePercent": {
-                    "title": "Volatile Percent Bounds",
-                    "description": "Percent bounds for stocks with a volatile type.",
-                    "type": "object",
-                    "properties": {
-                        "average": {
-                            "title": "Average Change",
-                            "description": "90% of the time - Randomly applied as positive or negative to variance.",
-                            "type": "number",
-                            "default": 0.50
-                        },
-                        "decrease": {
-                            "title": "Rare Decrease",
-                            "description": "5% of the time - Set variance to be exactly this number.",
-                            "type": "number",
-                            "default": 0.25
-                        },
-                        "increase": {
-                            "title": "Rare Increase",
-                            "description": "5% of the time - Set variance to be exactly this number.",
-                            "type": "number",
-                            "default": 2.5
-                        }
-                    },
-                    "required": ["average", "decrease", "increase"]
-                },
-                "sporadicPercent": {
-                    "title": "Sporadic Percent Bounds",
-                    "description": "Percent bounds for stocks with a sporadic type.",
-                    "type": "object",
-                    "properties": {
-                        "min": {
-                            "title": "Minimum",
-                            "description": "Minimum amount of mult to apply to stock value.",
-                            "type": "number",
-                            "default": 0.25
-                        },
-                        "max": {
-                            "title": "Maximum",
-                            "description": "Maximum amount of mult to apply to stock value.",
-                            "type": "number",
-                            "default": 2
-                        }
-                    },
-                    "required": ["min", "max"]
-                }
-            },
-            "required": ["enabled", "aliases", "description", "commandType", "cooldown", "types", "trends", "allowCreate", "maxCreates", "maxHistory", "showHistory", "updateFrequency", "dividendFrequency", "createBounds", "shareBounds", "creatorSharesUpperPercent", "typeActivatePercent", "trendPercent", "volatilePercent", "sporadicPercent"]
-        },
-        "tax": {
-            "title": "Tax",
-            "description": "Takes a percentage from top user and gives it to the user of the command.",
-            "examples": ["$$tax"],
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "title": "Enabled",
-                    "description": "Whether or not the command should be able to be used.",
-                    "type": "boolean",
-                    "default": true
-                },
-                "aliases": {
-                    "title": "Aliases",
-                    "description": "A list of all other names this command can go by.",
-                    "type": "array",
-                    "default": []
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "A description of the command, used in the $$help command.",
-                    "type": "string",
-                    "default": "Takes a percentage of basic.currency from the top basic.hodler."
-                },
-                "commandType": {
-                    "title": "Command Type",
-                    "description": "A definition of what type of command this is. Currently unused.",
-                    "type": "string",
-                    "enum": ["util", "game"],
-                    "default": "util"
-                },
-                "cooldown": {
-                    "title": "Cooldown",
-                    "description": "How long (in seconds) a user should wait between uses of this command.",
-                    "type": "integer",
-                    "default": 3600
-                },
-                "topUsercooldown": {
-                    "title": "Top User Cooldown",
-                    "description": "Apply cooldown to top user if they use $$tax on themselves.",
-                    "type": "boolean",
-                    "default": true
-                },
-                "taxAmount": {
-                    "title": "Tax Percentage",
-                    "description": "Percent amount to tax from top user.",
-                    "type": "number",
-                    "default": 0.05
-                }
-            },
-            "required": ["enabled", "aliases", "description", "commandType", "cooldown", "topUserCooldown", "taxAmount"]
-        },
-        "trade": {
-            "title": "Trade",
-            "description": "Initiates a trade with another user.",
-            "examples": ["$$trade @[user] [amount to send] [amount to receive]"],
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "title": "Enabled",
-                    "description": "Whether or not the command should be able to be used.",
-                    "type": "boolean",
-                    "default": true
-                },
-                "aliases": {
-                    "title": "Aliases",
-                    "description": "A list of all other names this command can go by.",
-                    "type": "array",
-                    "default": []
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "A description of the command, used in the $$help command.",
-                    "type": "string",
-                    "default": "Initiate a basic.currency trade with another user."
-                },
-                "commandType": {
-                    "title": "Command Type",
-                    "description": "A definition of what type of command this is. Currently unused.",
-                    "type": "string",
-                    "enum": ["util", "game"],
-                    "default": "util"
-                },
-                "cooldown": {
-                    "title": "Cooldown",
-                    "description": "How long (in seconds) a user should wait between uses of this command.",
-                    "type": "integer",
-                    "default": 120
-                }
-            },
-            "required": ["enabled", "aliases", "description", "commandType", "cooldown"]
-        },
-        "yolo": {
-            "title": "YOLO",
-            "description": "Allows users to gamble all currency on one roll at a chance for a high value return. Their currency will be divided amongst the lowest 3 users if it fails.",
-            "examples": ["$$yolo [acceptPhrase]"],
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "title": "Enabled",
-                    "description": "Whether or not the command should be able to be used.",
-                    "type": "boolean",
-                    "default": false
-                },
-                "aliases": {
-                    "title": "Aliases",
-                    "description": "A list of all other names this command can go by.",
-                    "type": "array",
-                    "default": []
-                },
-                "description": {
-                    "title": "Description",
-                    "description": "A description of the command, used in the $$help command.",
-                    "type": "string",
-                    "default": "You only live once. Bet all your basic.currency on a low chance to win big."
-                },
-                "commandType": {
-                    "title": "Command Type",
-                    "description": "A definition of what type of command this is. Currently unused.",
-                    "type": "string",
-                    "enum": ["util", "game"],
-                    "default": "game"
-                },
-                "cooldown": {
-                    "title": "Cooldown",
-                    "description": "How long (in seconds) a user should wait between uses of this command.",
-                    "type": "integer",
-                    "default": 10
-                },
-                "acceptPhrase": {
-                    "title": "Accept Phrase",
-                    "description": "A specific phrase must be entered to ensure the user understands their actions.",
-                    "type": "string",
-                    "default": "I am ready to lose my money"
-                },
-                "winChance": {
-                    "title": "Win Chance",
-                    "description": "A 1/x chance to win.",
-                    "type": "integer",
-                    "default": 7
-                },
-                "winMultiplier": {
-                    "title": "Win Multiplier",
-                    "description": "How much to multiply the user's total currency if they win.",
-                    "type": "integer",
-                    "default": 6
-                },
-                "loseDecreaseMult": {
-                    "title": "Win Multiplier Decrease on Lose",
-                    "description": "Upon each failed attempt, reduce winMultiplier by this amount.",
-                    "type": "number",
-                    "default": 0.5
-                },
-                "minMultiplier": {
-                    "title": "Minimum Multiplier",
-                    "description": "Stop decreasing winMultiplier after losing once it reaches this point.",
-                    "type": "number",
-                    "default": 1.5
-                }
-            },
-            "required": ["enabled", "aliases", "description", "commandType", "cooldown", "acceptPhrase", "winChance", "winMultiplier", "loseDecreaseMult", "minMultiplier"]
         }
     },
-    "required": ["accept", "balance", "blackjack", "circulation", "flip", "help", "leaderboard", "loserboard", "reset", "slots", "start", "stocks", "tax", "trade", "yolo"]
+    "required": ["roll", "flip", "help"]
 }
