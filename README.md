@@ -21,7 +21,7 @@ git clone https://github.com/zsd7200/rollbot.git
 3. In the `src/config` folder, make copies of all files with `.example` suffixes without the `.example` suffix and adjust as needed.
     - Example: `basic.json.example` should be copied and renamed to `basic.json`.
     - Files in the `src/config` folder should include:
-        - `basic.json`: Used for changing prefix, currency label, bot name (when referenced within commands). Change this file to change branding from Ratbase to whatever you prefer. 
+        - `basic.json`: Used for changing prefix, bot name (when referenced within commands). Change this file to change branding from Rollbot to whatever you prefer. 
             - [Schema](src/config/schema/basic.schema.json)
             - ~~[Documentation](doc/basic.md)~~
         - `commands.json`: Used for enabling/disabling commands and changing command aliases, cooldowns, descriptions, and modifying adjustable variables.
