@@ -39,6 +39,12 @@ export default {
             );
         }
         count = Math.abs(count);
+        if (count >= (config.roll?.maxRolls ?? 20)) {
+            channel.send(
+                `Maximum amount of rolls is ${config.roll?.maxRolls ?? 20}.`
+            );
+            count = config.roll?.maxRolls ?? 20;
+        }
 
         if (args[1]) {
             if (args[1].charAt(0).toLowerCase() == 'd') {

@@ -63,9 +63,15 @@
                         }
                     },
                     "required": ["initial", "between"]
+                },
+                "maxRolls": {
+                    "title": "Maximum Rolls",
+                    "description": "Maximum amount of rolls allowed.",
+                    "type": "integer",
+                    "default": 20
                 }
             },
-            "required": ["enabled", "aliases", "description", "commandType", "cooldown", "wait"]
+            "required": ["enabled", "aliases", "description", "commandType", "cooldown", "wait", "maxRolls"]
         },
         "flip": {
             "title": "Flip",

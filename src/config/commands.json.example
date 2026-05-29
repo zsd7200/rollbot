@@ -9,7 +9,8 @@
         "wait": {
             "initial": 500,
             "between": 100
-        }
+        },
+        "maxRolls": 20
     },
     "flip": {
         "enabled": true,
