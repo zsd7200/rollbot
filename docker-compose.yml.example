@@ -1,0 +1,9 @@
+services:
+  rollbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rollbot
+    environment:
+      TOKEN:   # discord bot token
+    restart: unless-stopped

@@ -1,0 +1,32 @@
+{
+    "$schema": "./schema/commands.schema.json",
+    "roll": {
+        "enabled": true,
+        "aliases": ["r"],
+        "description": "Roll one die or many dice.",
+        "commandType": "util",
+        "cooldown": 0,
+        "wait": {
+            "initial": 500,
+            "between": 100
+        }
+    },
+    "flip": {
+        "enabled": true,
+        "aliases": ["f", "fl"],
+        "description": "Flip a coin.",
+        "commandType": "util",
+        "cooldown": 0,
+        "wait": {
+            "initial": 500,
+            "result": 1000
+        }
+    },
+    "help": {
+        "enabled": true,
+        "aliases": ["?"],
+        "description": "Provides help and shows all available commands.",
+        "commandType": "util",
+        "cooldown": 0
+    }
+}

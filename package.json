@@ -1,0 +1,39 @@
+{
+  "name": "rollbot",
+  "version": "1.0.0",
+  "description": "Rollbot discord bot.",
+  "engines": {
+    "node": ">=22"
+  },
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "lint": "eslint \"./src/**/*.{js,ts}\" --fix",
+    "clean": "rimraf dist/",
+    "copyJs": "copyfiles -u 1 src/**/*.js dist/",
+    "copyJson": "copyfiles -u 1 src/config/*.json dist/",
+    "build": "npm run clean && npm run copyJs && npm run copyJson && tsc",
+    "dev": "concurrently \"tsc --watch\" \"nodemon --watch dist --ext js,json --exec node dist/index.js\"",
+    "start": "npm run build && node dist/index.js"
+  },
+  "author": "zsd7200",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.22.1",
+    "dotenv": "^17.2.3",
+    "pagination.djs": "^4.0.18"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.37.0",
+    "@types/node": "^24.7.2",
+    "concurrently": "^9.2.1",
+    "copyfiles": "^2.4.1",
+    "eslint": "^9.37.0",
+    "globals": "^16.4.0",
+    "nodemon": "^3.1.10",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.0"
+  }
+}
