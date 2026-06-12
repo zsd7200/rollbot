@@ -69,15 +69,18 @@ export default {
             for (let i = 0; i < count; i++) {
                 setTimeout(() => {
                     const result = randomInt(0, die) + 1;
-                    channel.send(
-                        `Roll ${i + 1}: ${
+                    const content = `Roll ${i + 1}: ${
                             (result == die) 
                                 ? ('**' + result + '!**') 
                                 : (result == 1)
                                     ? result + '...'
                                     : result
-                        }`
-                    );
+                        }`;
+
+                    message.reply({
+                        allowedMentions: { repliedUser: false },
+                        content: content,
+                    });
                 }, config.roll?.wait.between ?? 100);
             }
         }, config.roll?.wait.initial ?? 500);
