@@ -45,21 +45,18 @@ export default {
 
             setTimeout(() => {
                 const result = randomInt(0, 2);
+                const face = (desiredOutcome?.toLowerCase() === 'heads') ? 'Tails' : 'Heads';
+                let content = `**${face}**...\nYou lost, better luck next time.\n`;
 
                 if ((desiredOutcome.toLowerCase() === 'heads' && result === 0) ||
                    (desiredOutcome.toLowerCase() === 'tails' && result === 1)) {
-                    channel.send(
-                        `**${desiredOutcome.toUpperCase()}**! You win! \n` +
-                        'Congratulations!'
-                    );
+                    content = `**${desiredOutcome.toUpperCase()}**! You win! \nCongratulations!`;
                 }
-                else {
-                    const face = (desiredOutcome?.toLowerCase() === 'heads') ? 'Tails' : 'Heads';
-                    channel.send(
-                        '**' + face + '**...\n' +
-                        `You lost, better luck next time.\n`
-                    );
-                }
+
+                message.reply({
+                    allowedMentions: { repliedUser: false },
+                    content: content,
+                });
             }, config.flip?.wait.result ?? 1000);
         }, config.flip?.wait.initial ?? 500);
     },
