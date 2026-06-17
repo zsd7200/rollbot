@@ -11,6 +11,7 @@ export default {
         const channel = message.channel as TextChannel;
         let count = 1;
         let die = 20;
+        let match = null;
 
         if (args[0] === '?' || args[0]?.toLowerCase() === 'help') {
             return channel.send(
@@ -33,6 +34,7 @@ export default {
         }
 
         count = parseInt(args[0]);
+        match = args[0].match(/[dD]\d/);
         if (isNaN(count)) {
             return channel.send(
                 `Incorrect amount of dice. If you need help, please use **${basic.prefix ?? '$$'}roll help**.`,
@@ -58,6 +60,11 @@ export default {
                 );
             }
             die = Math.abs(die);
+        }
+
+        if (!args[1] && match) {
+            const substr = match[0].substring(1); // matching in this way will ALWAYS have a d in front
+            die = parseInt(substr);
         }
 
         channel.send(
