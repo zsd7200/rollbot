@@ -35,6 +35,7 @@ export default {
             args[1] = '20';
         }
 
+        /* count parsing */
         count = parseInt(args[0]);
         match = args[0].match(/[dD]\d*/);
         if (isNaN(count) || count == 0) {
@@ -43,6 +44,7 @@ export default {
             );
         }
         count = Math.abs(count);
+    
         if (count >= MAX_ROLLS) {
             channel.send(
                 `Maximum amount of rolls is ${MAX_ROLLS}.`
@@ -50,18 +52,13 @@ export default {
             count = MAX_ROLLS;
         }
 
+        /* die parsing */
         if (args[1]) {
             if (args[1].charAt(0).toLowerCase() == 'd') {
                 args[1] = args[1].substring(1);
             }
 
             die = parseInt(args[1]);
-            if (isNaN(die)) {
-                return channel.send(
-                    `Incorrect type of die. If you need help, please use **${basic.prefix ?? '$$'}roll help**.`,
-                );
-            }
-            die = Math.abs(die);
         }
 
         if (!args[1] && match) {
@@ -69,6 +66,13 @@ export default {
             die = parseInt(substr);
         }
 
+        if (isNaN(die) || die == 0) {
+            return channel.send(
+                `Incorrect type of die. If you need help, please use **${basic.prefix ?? '$$'}roll help**.`,
+            );
+        }
+        die = Math.abs(die);
+    
         if (die > MAX_DIE) {
             channel.send(
                 `Maximum amount of die faces is ${MAX_DIE}.`
