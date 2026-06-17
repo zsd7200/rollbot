@@ -9,6 +9,8 @@ export default {
     cooldown: config.roll?.cooldown ?? 0,
     async execute(message: Message, args: Array<string>) {
         const channel = message.channel as TextChannel;
+        const MAX_ROLLS = config.roll?.maxRolls ?? 20;
+        const MAX_DIE = config.roll?.maxDie ?? 1000;
         let count = 1;
         let die = 20;
         let match = null;
@@ -41,11 +43,11 @@ export default {
             );
         }
         count = Math.abs(count);
-        if (count >= (config.roll?.maxRolls ?? 20)) {
+        if (count >= MAX_ROLLS) {
             channel.send(
-                `Maximum amount of rolls is ${config.roll?.maxRolls ?? 20}.`
+                `Maximum amount of rolls is ${MAX_ROLLS}.`
             );
-            count = config.roll?.maxRolls ?? 20;
+            count = MAX_ROLLS;
         }
 
         if (args[1]) {
@@ -65,6 +67,13 @@ export default {
         if (!args[1] && match) {
             const substr = match[0].substring(1); // matching in this way will ALWAYS have a d in front
             die = parseInt(substr);
+        }
+
+        if (die > MAX_DIE) {
+            channel.send(
+                `Maximum amount of die faces is ${MAX_DIE}.`
+            );
+            die = MAX_DIE;
         }
 
         channel.send(

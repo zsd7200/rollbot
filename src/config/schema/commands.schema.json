@@ -69,6 +69,12 @@
                     "description": "Maximum amount of rolls allowed.",
                     "type": "integer",
                     "default": 20
+                },
+                "maxDie": {
+                    "title": "Maximum Die",
+                    "description": "Upper bound of the dice being rolled.",
+                    "type": "integer",
+                    "default": 1000
                 }
             },
             "required": ["enabled", "aliases", "description", "commandType", "cooldown", "wait", "maxRolls"]

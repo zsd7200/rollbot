@@ -10,7 +10,8 @@
             "initial": 500,
             "between": 100
         },
-        "maxRolls": 20
+        "maxRolls": 20,
+        "maxDie": 1000
     },
     "flip": {
         "enabled": true,
