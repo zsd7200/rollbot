@@ -71,8 +71,8 @@
                     "default": 20
                 },
                 "maxDie": {
-                    "title": "Maximum Die",
-                    "description": "Upper bound of the dice being rolled.",
+                    "title": "Maximum Die Faces",
+                    "description": "Upper bound of faces on the dice being rolled.",
                     "type": "integer",
                     "default": 1000
                 }
