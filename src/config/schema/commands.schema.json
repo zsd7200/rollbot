@@ -27,7 +27,7 @@
                 },
                 "description": {
                     "title": "Description",
-                    "description": "A description of the command, used in the $$help command.",
+                    "description": "A description of the command, used in the !help command.",
                     "type": "string",
                     "default": "Accepts trades initiated by the trade command."
                 },
@@ -102,7 +102,7 @@
                 },
                 "description": {
                     "title": "Description",
-                    "description": "A description of the command, used in the $$help command.",
+                    "description": "A description of the command, used in the !help command.",
                     "type": "string",
                     "default": "Bet basic.currency on the outcome of a coin flip."
                 },
@@ -162,7 +162,7 @@
                 },
                 "description": {
                     "title": "Description",
-                    "description": "A description of the command, used in the $$help command.",
+                    "description": "A description of the command, used in the !help command.",
                     "type": "string",
                     "default": "Provides help and shows all available commands."
                 },
