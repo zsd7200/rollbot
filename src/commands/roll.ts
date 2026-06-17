@@ -34,8 +34,8 @@ export default {
         }
 
         count = parseInt(args[0]);
-        match = args[0].match(/[dD]\d/);
-        if (isNaN(count)) {
+        match = args[0].match(/[dD]\d*/);
+        if (isNaN(count) || count == 0) {
             return channel.send(
                 `Incorrect amount of dice. If you need help, please use **${basic.prefix ?? '$$'}roll help**.`,
             );
