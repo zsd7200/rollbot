@@ -1,7 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "ratbase/commands",
-    "title": "RATBASE's commands.json",
+    "$id": "rollbot/commands",
+    "title": "Rollbot's commands.json",
     "description": "Configuration for all bot commands. Anything with `basic.X` in its description will be replaced with the content of X within basic.json.",
     "type": "object",
     "properties": {
