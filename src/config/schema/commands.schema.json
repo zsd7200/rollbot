@@ -9,7 +9,7 @@
             "title": "Roll",
             "description": "Roll one die or many dice.",
             "examples": [
-                "$roll [count] [type of die]"
+                "!roll [count] [type of die]"
             ],
             "type": "object",
             "properties": {
@@ -83,8 +83,8 @@
             "title": "Flip",
             "description": "Allows users to flip a coin.",
             "examples": [
-                "$flip heads",
-                "$flip tails"
+                "!flip heads",
+                "!flip tails"
             ],
             "type": "object",
             "properties": {
@@ -145,7 +145,7 @@
         "help": {
             "title": "Help",
             "description": "Shows a list of all available commands.",
-            "examples": ["$help", "$?"],
+            "examples": ["!help", "!?"],
             "type": "object",
             "properties": {
                 "enabled": {
